@@ -11,15 +11,12 @@ echo -e "${GREEN}===> Setting up Taints for nodes...${NC}"
 kubectl taint nodes -l app=mysql app=mysql:NoSchedule --overwrite
 
 echo -e "${GREEN}===> Upgrading dependencies Helm (sub-charts)...${NC}"
-helm dependency update ./helm-chart/todoapp
+helm dependency update .infrastructure/helm-chart/todoapp
 
 echo -e "${GREEN}===> Deploying todoapp together with mysql...${NC}"
-helm upgrade --install todoapp-release ./helm-chart/todoapp \
+helm upgrade --install todoapp-release .infrastructure/helm-chart/todoapp \
   --namespace todoapp \
   --create-namespace \
   --wait
-
-echo -e "${GREEN}===> Generating output.log...${NC}"
-kubectl get all,cm,secret,ing -A > output.log
 
 echo -e "${GREEN}===> Ready to use!${NC}"
