@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{.Chart.Name}}
+  name: {{.Chart.Name}}-statefulSet
   namespace: {{.Values.mysql.namespace}}
 spec:
   selector:
@@ -66,7 +66,7 @@ spec:
       volumes:
       - name: config-map
         configMap:
-          name: {{.Chart.Name}}
+          name: {{.Chart.Name}}-config
       tolerations:
       - key: {{.Values.mysql.tolerations.key}}
         operator: "Equal"

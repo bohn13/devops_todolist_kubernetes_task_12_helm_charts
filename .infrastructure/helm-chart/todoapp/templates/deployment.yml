@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Chart.Name}}
+  name: {{.Chart.Name}}-deployment
   namespace: {{.Values.todoapp.namespace}}
 spec:
   strategy:
@@ -17,10 +17,10 @@ spec:
       labels:
         app: {{.Chart.Name}}
     spec:
-      serviceAccountName: {{.Values.todoapp.serviceAccountName}}
+      serviceAccountName: {{ .Chart.Name }}-{{ .Values.todoapp.serviceAccountName }}
       containers:
       - name: {{.Chart.Name}}
-        image: {{.Values.todoapp.imageRepository}}/{{.Values.todoapp.tag}}
+        image: {{ .Values.todoapp.imageRepository }}:{{ .Values.todoapp.tag | default "latest" }}
         volumeMounts:
         - name: data
           mountPath: /app/data
@@ -67,7 +67,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: pvc-data
+          claimName: {{ .Chart.Name }}-data
       - name: {{.Chart.Name}}-secrets-volume
         secret:
           secretName: {{.Chart.Name}}-secret

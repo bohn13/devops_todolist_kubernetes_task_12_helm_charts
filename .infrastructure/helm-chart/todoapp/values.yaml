@@ -1,7 +1,7 @@
 todoapp:
   namespace: todoapp
-  imageRepository: ikulyk404
-  tag: todoapp:4.0.1
+  imageRepository: ikulyk404/todoapp
+  tag: 4.0.1
 
   secrets:
     SECRET_KEY: '@e2(yx)v&tgh3_s=0yja-i!dpebxsz^dg47x)-k&kq_3zf*9e*'
@@ -34,10 +34,10 @@ todoapp:
     averageMemoryUtilization: 70
 
   pv:
-    volumeName: pv-data
+    volumeName: "data-volume"
     storageCapacity: '1Gi'
 
-  pvc:
-    volumeName: pv-data
+  pvс:
+    storageCapacity: '1Gi'
 
   serviceAccountName: 'secrets-reader'
