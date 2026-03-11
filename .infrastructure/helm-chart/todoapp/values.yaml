@@ -37,7 +37,7 @@ todoapp:
     volumeName: "data-volume"
     storageCapacity: '1Gi'
 
-  pvс:
+  pvc:
     storageCapacity: '1Gi'
 
   serviceAccountName: 'secrets-reader'
